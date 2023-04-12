@@ -169,8 +169,9 @@ class MySQLHandler extends AbstractProcessingHandler
          * getting added to $record['extra']
          * @see https://github.com/Seldaek/monolog/blob/master/doc/02-handlers-formatters-processors.md
          */
+
         if (isset($record['extra'])) {
-            $record['context'] = array_merge($record['context'], $record['extra']);
+            $record = $record->with(context: array_merge($record['context'], $record['extra']));
         }
 
         $content = $this->mySQLRecord->filterContent(array_merge([
